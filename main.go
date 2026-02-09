@@ -6,7 +6,7 @@ import (
     "groupie-tracker/handlers"
     "net/http"
     "os"
-    "time"
+    "html/template"
 )
 
 type Artist struct {
@@ -39,26 +39,28 @@ type Relation struct {
 
 func getArtists(w http.ResponseWriter, r *http.Request) {
     apiURL := "https://groupietrackers.herokuapp.com/api/artists"
-    client := http.Client{
-        Timeout: 10 * time.Second,
-    }
-    
-    resp, err := client.Get(apiURL)
+    resp, err := http.Get(apiURL)
     if err != nil {
-        http.Error(w, "Erreur lors de la requête externe", http.StatusInternalServerError)
+        http.Error(w, "Erreur API", http.StatusInternalServerError)
         return
     }
     defer resp.Body.Close()
-    
+
     var artists []Artist
-    err = json.NewDecoder(resp.Body).Decode(&artists)
+    json.NewDecoder(resp.Body).Decode(&artists)
+
+    // 1. On analyse le fichier HTML
+    tmpl, err := template.ParseFiles("templates/artists.html")
     if err != nil {
-        http.Error(w, "Erreur : JSON impossible à lire", http.StatusInternalServerError)
+        http.Error(w, "Template introuvable : "+err.Error(), http.StatusInternalServerError)
         return
     }
-    
-    w.Header().Set("Content-Type", "application/json")
-    json.NewEncoder(w).Encode(artists)
+
+    // 2. On "injecte" les données des artistes dans le template
+    err = tmpl.Execute(w, artists)
+    if err != nil {
+        http.Error(w, "Erreur d'affichage : "+err.Error(), http.StatusInternalServerError)
+    }
 }
 
 func main() {
