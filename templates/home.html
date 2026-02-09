@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎀 Groupie Tracker Kawaii</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Comic Sans MS', 'Arial', sans-serif;
+            background: linear-gradient(135deg, #FFB6D9 0%, #D5A5FF 50%, #A8D8FF 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            overflow-x: hidden;
+        }
+
+        /* Nuages kawaii en arrière-plan */
+        .cloud {
+            position: fixed;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 100px;
+            animation: float 20s infinite ease-in-out;
+        }
+
+        .cloud1 { width: 100px; height: 50px; top: 10%; left: 10%; animation-delay: 0s; }
+        .cloud2 { width: 150px; height: 70px; top: 20%; right: 15%; animation-delay: 3s; }
+        .cloud3 { width: 120px; height: 60px; bottom: 15%; left: 20%; animation-delay: 6s; }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        /* Étoiles scintillantes */
+        .stars {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+        }
+
+        .star {
+            position: absolute;
+            background: white;
+            width: 3px;
+            height: 3px;
+            border-radius: 50%;
+            animation: twinkle 2s infinite;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.5); }
+        }
+
+        /* Container principal */
+        .container {
+            position: relative;
+            z-index: 10;
+            text-align: center;
+            max-width: 800px;
+            width: 100%;
+        }
+
+        /* Titre principal avec effet 3D */
+        h1 {
+            font-size: 4em;
+            color: #FF69B4;
+            text-shadow: 
+                3px 3px 0px #FFB6D9,
+                6px 6px 0px #FFC0E5,
+                9px 9px 20px rgba(255, 105, 180, 0.4);
+            margin: 40px 0 20px 0;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        /* Sous-titre mignon */
+        .subtitle {
+            font-size: 1.5em;
+            color: #9370DB;
+            margin-bottom: 50px;
+            text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.7);
+        }
+
+        /* Card kawaii */
+        .card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 30px;
+            padding: 50px;
+            box-shadow: 
+                0 10px 30px rgba(255, 105, 180, 0.3),
+                0 0 0 5px #FFB6D9,
+                0 0 0 10px #FFC0E5;
+            margin: 20px 0;
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-10px) rotate(1deg);
+        }
+
+        /* Emoji géant */
+        .emoji {
+            font-size: 5em;
+            margin: 20px 0;
+            display: inline-block;
+            animation: spin 3s infinite ease-in-out;
+        }
+
+        @keyframes spin {
+            0%, 100% { transform: rotate(0deg); }
+            25% { transform: rotate(-5deg); }
+            75% { transform: rotate(5deg); }
+        }
+
+        /* Bouton kawaii */
+        .btn-kawaii {
+            display: inline-block;
+            background: linear-gradient(135deg, #FF69B4, #FFB6D9);
+            color: white;
+            font-size: 1.8em;
+            font-weight: bold;
+            padding: 20px 50px;
+            border-radius: 50px;
+            text-decoration: none;
+            box-shadow: 
+                0 5px 15px rgba(255, 105, 180, 0.4),
+                inset 0 -3px 0 rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+            border: 5px solid white;
+            margin: 20px 0;
+        }
+
+        .btn-kawaii:hover {
+            transform: scale(1.1);
+            box-shadow: 
+                0 10px 30px rgba(255, 105, 180, 0.6),
+                inset 0 -3px 0 rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-kawaii:active {
+            transform: scale(0.95);
+        }
+
+        /* Décorations kawaii */
+        .decoration {
+            font-size: 2em;
+            display: inline-block;
+            margin: 0 10px;
+            animation: wiggle 1s infinite;
+        }
+
+        @keyframes wiggle {
+            0%, 100% { transform: rotate(0deg); }
+            25% { transform: rotate(-10deg); }
+            75% { transform: rotate(10deg); }
+        }
+
+        /* Footer kawaii */
+        .footer {
+            margin-top: 50px;
+            color: white;
+            font-size: 1.2em;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+    </style>
+</head>
+<body>
+    <!-- Nuages -->
+    <div class="cloud cloud1"></div>
+    <div class="cloud cloud2"></div>
+    <div class="cloud cloud3"></div>
+
+    <!-- Étoiles -->
+    <div class="stars">
+        <div class="star" style="top: 10%; left: 20%; animation-delay: 0s;"></div>
+        <div class="star" style="top: 30%; left: 80%; animation-delay: 0.5s;"></div>
+        <div class="star" style="top: 50%; left: 10%; animation-delay: 1s;"></div>
+        <div class="star" style="top: 70%; left: 90%; animation-delay: 1.5s;"></div>
+        <div class="star" style="top: 20%; left: 50%; animation-delay: 2s;"></div>
+        <div class="star" style="top: 80%; left: 60%; animation-delay: 0.3s;"></div>
+        <div class="star" style="top: 40%; left: 30%; animation-delay: 1.2s;"></div>
+        <div class="star" style="top: 60%; left: 70%; animation-delay: 1.8s;"></div>
+    </div>
+
+    <div class="container">
+        <h1>🎀 Groupie Tracker 🎀</h1>
+        <p class="subtitle">✨ Découvre tes artistes préférés ✨</p>
+
+        <div class="card">
+            <div class="emoji">🎸🎤🎵</div>
+            <h2 style="color: #FF69B4; font-size: 2em; margin: 20px 0;">
+                <span class="decoration">🌸</span>
+                Bienvenue !
+                <span class="decoration">🌸</span>
+            </h2>
+            <p style="font-size: 1.3em; color: #9370DB; margin: 20px 0;">
+                Musique et overdose de rose garantie ! ପ(๑•ᴗ•๑)ଓ ♡
+            </p>
+            
+            <a href="/artists" class="btn-kawaii">
+                🎀 Voir les artistes 🎀
+            </a>
+
+            <div style="margin-top: 30px; font-size: 3em;">
+                💖 🎶 🌟 🦄 🍓
+            </div>
+        </div>
+
+        <div class="footer">
+            Made with 💕 with Love by Nin and claude ia !
+        </div>
+    </div>
+</body>
+</html>
