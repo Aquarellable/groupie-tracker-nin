@@ -113,6 +113,7 @@
             transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
+            height: 100%; /* Pour que toutes les cartes aient la même hauteur */
         }
 
         .artist-card::before {
@@ -164,13 +165,8 @@
             text-shadow: 2px 2px 0px #FFE5EC;
         }
 
-        .artist-card h2::before {
-            content: '🎀 ';
-        }
-
-        .artist-card h2::after {
-            content: ' 🎀';
-        }
+        .artist-card h2::before { content: '🎀 '; }
+        .artist-card h2::after { content: ' 🎀'; }
 
         .artist-card p {
             color: #9370DB;
@@ -203,22 +199,21 @@
             font-size: 1.1em;
         }
 
-        .members strong::before {
-            content: '💕 ';
-        }
+        .members strong::before { content: '💕 '; }
 
-        /* Style pour la liste des membres */
-        .members br + br {
-            display: none;
-        }
-
-        /* Footer kawaii */
         .footer {
             text-align: center;
             margin: 50px 0 30px 0;
             color: white;
             font-size: 1.3em;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Suppression du style par défaut des liens pour les cartes */
+        .artist-link {
+            text-decoration: none;
+            color: inherit;
+            display: block;
         }
     </style>
 </head>
@@ -233,18 +228,20 @@
         
         <div class="artists-grid">
             {{range .}}
-            <div class="artist-card">
-                <img src="{{.Image}}" alt="{{.Name}}">
-                <h2>{{.Name}}</h2>
-                <p><strong>📅 Création:</strong> {{.CreationDate}}</p>
-                <p><strong>💿 Premier Album:</strong> {{.FirstAlbum}}</p>
-                <p class="members">
-                    <strong>Membres:</strong>
-                    {{range $index, $member := .Members}}
-                        {{if $index}}, {{end}}{{$member}}
-                    {{end}}
-                </p>
-            </div>
+            <a href="/details?id={{.ID}}" class="artist-link">
+                <div class="artist-card">
+                    <img src="{{.Image}}" alt="{{.Name}}">
+                    <h2>{{.Name}}</h2>
+                    <p><strong>📅 Création:</strong> {{.CreationDate}}</p>
+                    <p><strong>💿 Premier Album:</strong> {{.FirstAlbum}}</p>
+                    <div class="members">
+                        <strong>Membres:</strong>
+                        {{range $index, $member := .Members}}
+                            {{if $index}}, {{end}}{{$member}}
+                        {{end}}
+                    </div>
+                </div>
+            </a>
             {{end}}
         </div>
 
